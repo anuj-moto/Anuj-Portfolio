@@ -1,96 +1,172 @@
-import { lazy, Suspense } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { OrbitalSystem } from '@/components/OrbitalSystem'
+import { ScrambleWord } from '@/components/ScrambleWord'
 
-const AIWorkflowScene = lazy(() =>
-  import('../components/AIWorkflowScene').then((m) => ({ default: m.AIWorkflowScene }))
-)
+const WORD_STAGGER = 0.18
+const CHAR_STAGGER = 0.04
+const REVEAL_DURATION = 0.5
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  const line1 = ['Designing', 'products']
+  const line2 = ['powered', 'by', 'intent.']
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ delay: 0.2 })
+      tl.from(
+        subtitleRef.current,
+        { opacity: 0, y: 16, duration: 0.8, ease: 'power3.out' },
+        0.7
+      ).from(
+        ctaRef.current,
+        { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' },
+        1.0
+      )
+    },
+    { scope: containerRef }
+  )
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Scene background */}
-      <div className="absolute inset-0 z-0">
-        <Suspense
-          fallback={
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
-            </div>
-          }
-        >
-          <AIWorkflowScene />
-        </Suspense>
+    <section
+      ref={containerRef}
+      className="relative h-[100svh] min-h-[640px] flex flex-col justify-end pb-20 pt-28 px-6 overflow-hidden"
+    >
+      {/* Interactive backdrop — fluid cursor blobs */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
+        <OrbitalSystem />
+
+        {/* Top + bottom fade so navbar and scroll indicator stay clean */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(10,10,10,0.45) 0%, transparent 18%, transparent 82%, rgba(10,10,10,0.7) 100%)',
+          }}
+        />
+        {/* Grain */}
+        <div
+          className="absolute inset-0 opacity-[0.05] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
       </div>
 
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-surface via-surface/40 to-surface/60" />
-
-      {/* Hero content */}
-      <div className="relative z-[2] text-center px-6 max-w-3xl mx-auto pt-20">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-accent-glow text-sm font-medium tracking-widest uppercase mb-4"
-        >
-          Product Designer &middot; 4 Years Experience
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-5xl md:text-7xl font-bold text-text-bright mb-6 tracking-tight"
-        >
-          I design products
-          <br />
-          <span className="text-accent">powered by AI</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-lg md:text-xl text-text-muted max-w-xl mx-auto mb-10"
-        >
-          Blending human-centered design with intelligent systems to create
-          products that think, adapt, and delight.
-        </motion.p>
-
+      <div className="relative z-[2] max-w-6xl mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex gap-4 justify-center"
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-3 mb-8"
         >
-          <a
-            href="#work"
-            className="px-6 py-3 bg-accent hover:bg-accent-glow text-text-bright rounded-lg font-medium transition-colors duration-300"
-          >
-            View My Work
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 border border-surface-border hover:border-accent text-text rounded-lg font-medium transition-colors duration-300"
-          >
-            Get in Touch
-          </a>
+          <span className="h-1.5 w-1.5 rounded-full bg-[#F5F5F5]" />
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A8A8A]">
+            Available for projects — 2026
+          </span>
         </motion.div>
+
+        <h1
+          className="font-display font-medium text-[#F5F5F5] tracking-tight"
+          style={{
+            fontSize: 'clamp(2.25rem, 6.5vw, 6rem)',
+            lineHeight: 0.95,
+          }}
+        >
+          <span className="block pb-[0.15em]">
+            {line1.map((word, wi) => (
+              <span key={word} className="inline-block mr-[0.2em]">
+                <ScrambleWord
+                  text={word}
+                  delay={wi * WORD_STAGGER}
+                  charStagger={CHAR_STAGGER}
+                  revealDuration={REVEAL_DURATION}
+                />
+              </span>
+            ))}
+          </span>
+          <span className="block pb-[0.15em]">
+            {line2.map((word, wi) => (
+              <span
+                key={word}
+                className={`inline-block mr-[0.2em] ${
+                  wi === line2.length - 1
+                    ? 'text-[#5A5A5A] italic font-light'
+                    : ''
+                }`}
+              >
+                <ScrambleWord
+                  text={word}
+                  delay={(line1.length + wi) * WORD_STAGGER}
+                  charStagger={CHAR_STAGGER}
+                  revealDuration={REVEAL_DURATION}
+                />
+              </span>
+            ))}
+          </span>
+        </h1>
+
+        <div className="mt-12 grid md:grid-cols-[1fr_auto] gap-10 items-end">
+          <p
+            ref={subtitleRef}
+            className="text-base md:text-lg text-[#8A8A8A] max-w-xl leading-relaxed"
+          >
+            I'm Anuj — a product designer shaping interfaces for AI-first tools,
+            with a focus on clarity, pace, and trust.
+          </p>
+
+          <div ref={ctaRef} className="flex gap-4 flex-wrap">
+            <a
+              href="#work"
+              className="group inline-flex items-center gap-3 h-12 px-7 bg-[#F5F5F5] text-[#0A0A0A] text-xs uppercase tracking-[0.2em] font-medium rounded-full transition-colors hover:bg-[#FFFFFF]"
+            >
+              View Work
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-3 h-12 px-7 border border-[#242424] text-[#F5F5F5] text-xs uppercase tracking-[0.2em] font-medium rounded-full transition-colors hover:border-[#F5F5F5]"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="absolute bottom-6 left-6 z-[3] hidden md:flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#5A5A5A]"
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-[#5A5A5A]" />
+        <span>Click anywhere — reposition system</span>
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]"
+        transition={{ delay: 1.4 }}
+        className="absolute bottom-6 right-6 z-[3] flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#8A8A8A]"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-          className="w-5 h-8 border-2 border-text-muted rounded-full flex justify-center pt-1.5"
+        <span>Scroll</span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
         >
-          <div className="w-1 h-2 bg-text-muted rounded-full" />
-        </motion.div>
+          <ArrowDown className="w-3 h-3" />
+        </motion.span>
       </motion.div>
     </section>
   )

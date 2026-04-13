@@ -1,38 +1,26 @@
-import { useEffect, useRef } from 'react'
-import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { AmbientBackground } from './components/AmbientBackground'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { Hero } from './sections/Hero'
+import { Brands } from './sections/Brands'
 import { About } from './sections/About'
 import { Process } from './sections/Process'
 import { Work } from './sections/Work'
 import { Skills } from './sections/Skills'
 import { Contact } from './sections/Contact'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function App() {
-  const lenisRef = useRef<Lenis | null>(null)
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    })
-    lenisRef.current = lenis
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-
-    return () => lenis.destroy()
-  }, [])
-
   return (
-    <div className="relative">
+    <div className="relative bg-[var(--color-bg)] text-[var(--color-text)]">
+      <AmbientBackground />
       <Navbar />
-      <main>
+      <main className="relative" style={{ zIndex: 1 }}>
         <Hero />
+        <Brands />
         <About />
         <Process />
         <Work />
