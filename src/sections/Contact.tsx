@@ -23,7 +23,7 @@ export function Contact() {
     >
       <div className="max-w-6xl mx-auto">
         <SectionHeading
-          index="05"
+          index="07"
           label="Contact"
           title="Have something quiet to build?"
           description="Open to select product design work and partnerships. Short notes get short replies — fast."
@@ -36,11 +36,11 @@ export function Contact() {
                 Direct
               </p>
               <a
-                href="mailto:hello@anuj.design"
-                className="font-display text-2xl md:text-3xl text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors inline-flex items-center gap-3 group"
+                href="mailto:anujshukla521as@gmail.com"
+                className="font-display text-2xl md:text-3xl text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors inline-flex items-center gap-3 group break-all"
               >
-                hello@anuj.design
-                <ArrowUpRight className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#F5F5F5] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                anujshukla521as@gmail.com
+                <ArrowUpRight className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#F5F5F5] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 shrink-0" />
               </a>
             </div>
 
@@ -49,17 +49,28 @@ export function Contact() {
                 Elsewhere
               </p>
               <div className="flex flex-col gap-3">
-                {['LinkedIn', 'Twitter', 'Dribbble', 'GitHub'].map((l) => (
-                  <a
-                    key={l}
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="animated-underline self-start text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors"
-                  >
-                    {l}
-                  </a>
-                ))}
+                <a
+                  href="https://www.linkedin.com/in/anuj-shukla-aba470196/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="animated-underline self-start text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://drive.google.com/file/d/1gerUpX21IzRlN5F18LThwrSOnyEElQ91/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="animated-underline self-start text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors"
+                >
+                  Resume
+                </a>
+                <a
+                  href="tel:+918758745659"
+                  className="animated-underline self-start text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors"
+                >
+                  +91 87587 45659
+                </a>
               </div>
             </div>
 
@@ -67,7 +78,7 @@ export function Contact() {
               <p className="text-[10px] uppercase tracking-[0.25em] text-[#5A5A5A] mb-3">
                 Based
               </p>
-              <p className="text-[#F5F5F5]">Remote — working across time zones</p>
+              <p className="text-[#F5F5F5]">India · Remote, working across time zones</p>
             </div>
           </div>
 

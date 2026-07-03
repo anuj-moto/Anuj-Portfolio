@@ -159,7 +159,7 @@ export default function CaseStudy() {
       >
         <div className="max-w-6xl mx-auto">
           <Link
-            to="/#work"
+            to="/work"
             className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#8A8A8A] hover:text-[#F5F5F5] transition-colors mb-12"
           >
             <ArrowLeft className="w-3 h-3" />

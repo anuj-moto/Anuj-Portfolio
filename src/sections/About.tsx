@@ -9,32 +9,44 @@ gsap.registerPlugin(ScrollTrigger)
 
 const timeline = [
   {
-    year: '2022',
-    role: 'Junior Product Designer',
-    company: 'Startup Studio',
+    year: '2021',
+    role: 'UI Designer Intern',
+    company: 'Photoshooto',
+    location: 'India',
     description:
-      'Cut my teeth designing MVPs for early-stage products. Learned to ship fast without sacrificing craft.',
+      'Built UI components alongside product and marketing teams and got my first real grounding in design systems. Picked it up fast enough to earn Intern of the Week and Intern of the Month back-to-back.',
+  },
+  {
+    year: '2021',
+    role: 'UI/UX Designer',
+    company: 'Cupid Knot',
+    location: 'Surat, India',
+    description:
+      'Owned the product end-to-end — my first time carrying UX on my own. Ran A/B and usability tests to settle design debates with evidence, and worked directly with stakeholders to turn market signals into shippable decisions.',
+  },
+  {
+    year: '2022',
+    role: 'Freelance UI/UX Designer',
+    company: 'Anchor (Stealth Startup)',
+    location: 'NYC, USA',
+    description:
+      'Designed a real-estate web product 0→1 — user research, IA, and a design system from scratch, then shipped it into HTML/CSS myself. Worked shoulder-to-shoulder with the founders to keep every design call tied to a business goal.',
   },
   {
     year: '2023',
-    role: 'Product Designer',
-    company: 'DesignScale',
+    role: 'UI/UX Designer',
+    company: 'Traya',
+    location: 'Mumbai, India',
     description:
-      'Led the redesign of a B2B analytics platform serving 50k+ users. Built and maintained the design system.',
-  },
-  {
-    year: '2024',
-    role: 'Senior Product Designer',
-    company: 'AI Nexus',
-    description:
-      'Pioneered AI-integrated design workflows. Shipped conversational interfaces and generative design tools.',
+      'Shipped Book a Call, Diet Plan, Build a Habit, and Digital Prescription — and measured every one. Lifted retention 14–17%, conversion 12%, and Book-a-Call efficiency 11%, with user interviews and Microsoft Clarity sessions driving each iteration. Built Tatva, Traya\'s M3-based design system, as the foundation under all of it.',
   },
   {
     year: '2025',
-    role: 'Lead Product Designer',
-    company: 'Independent',
+    role: 'Product Designer',
+    company: 'MasteryPrep',
+    location: 'Baton Rouge, USA',
     description:
-      'Working with startups building AI-native products. Focused on making complex systems feel intuitive.',
+      'Set the foundational structure of the Student Experience under tight constraints, then shipped the WorkKeys student flows on top of it. Rebuilt QTI interactions around the student POV — HotText and others — and designed the accessibility toolset: Answer Masking, Strikethrough, and Read Aloud. Went past design too: built an agent that auto-resolves accessibility tickets straight from GitLab and personally cleared the a11y backlog. Ran UAT cycles and mentored engineers through the component structure. Impact numbers from the WorkKeys and accessibility work are still landing.',
   },
 ]
 
@@ -88,7 +100,7 @@ export function About() {
           index="01"
           label="About"
           title="Quiet interfaces. Honest systems."
-          description="For the past four years I've been making AI-powered products feel less like software and more like a calm conversation with something that listens."
+          description="For the past four years I've been shipping product design across health, edtech, real-estate, and consumer apps — building design systems from the ground up and tuning interfaces with research, testing, and the kind of care that shows up in conversion numbers."
         />
 
         <div className="grid md:grid-cols-[1fr_2fr] gap-16 mt-24">
@@ -99,7 +111,7 @@ export function About() {
               </p>
               <p className="font-display text-2xl text-[#F5F5F5] leading-snug">
                 Four years.<br />
-                Four chapters.<br />
+                Five chapters.<br />
                 <span className="text-[#5A5A5A]">One direction.</span>
               </p>
             </div>
@@ -114,16 +126,19 @@ export function About() {
 
             {timeline.map((item) => (
               <div
-                key={item.year}
+                key={`${item.year}-${item.company}`}
                 className="timeline-item relative pl-10 pb-16 last:pb-0"
               >
                 <div className="absolute left-[-3px] top-2 w-[7px] h-[7px] rounded-full bg-[#F5F5F5]" />
-                <div className="flex items-baseline gap-4 mb-3">
+                <div className="flex items-baseline flex-wrap gap-x-4 gap-y-1 mb-3">
                   <span className="font-mono text-xs text-[#5A5A5A]">
                     {item.year}
                   </span>
                   <span className="text-[10px] uppercase tracking-[0.2em] text-[#8A8A8A]">
                     {item.company}
+                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#5A5A5A]">
+                    · {item.location}
                   </span>
                 </div>
                 <h3 className="font-display text-2xl md:text-3xl text-[#F5F5F5] mb-3 font-medium">

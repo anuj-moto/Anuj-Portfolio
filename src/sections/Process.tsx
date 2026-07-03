@@ -72,7 +72,7 @@ export function Process() {
     >
       <div className="max-w-6xl mx-auto">
         <SectionHeading
-          index="02"
+          index="03"
           label="Process"
           title="A workflow built around signal."
           description="Every phase is augmented by AI — not to replace thinking, but to amplify it. The craft stays human."

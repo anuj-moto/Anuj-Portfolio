@@ -10,16 +10,20 @@ import {
 const navLinks = [
   { label: 'About', href: '/#about' },
   { label: 'Process', href: '/#process' },
-  { label: 'Work', href: '/#work' },
+  { label: 'Work', href: '/work' },
   { label: 'Skills', href: '/#skills' },
   { label: 'Contact', href: '/#contact' },
 ]
 
 const social = [
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Twitter', href: '#' },
-  { label: 'Dribbble', href: '#' },
-  { label: 'GitHub', href: '#' },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/anuj-shukla-aba470196/',
+  },
+  {
+    label: 'Resume',
+    href: 'https://drive.google.com/file/d/1gerUpX21IzRlN5F18LThwrSOnyEElQ91/view?usp=sharing',
+  },
 ]
 
 export function Navbar() {
@@ -45,7 +49,7 @@ export function Navbar() {
           href="/"
           className="font-display text-base font-medium tracking-tight text-[#F5F5F5]"
         >
-          Anuj<span className="text-[#8A8A8A]"> / Designer</span>
+          Anuj Shukla<span className="text-[#8A8A8A]"> / Designer</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -190,10 +194,10 @@ export function Navbar() {
                 ))}
               </div>
               <a
-                href="mailto:hello@anuj.design"
-                className="font-display text-lg text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors"
+                href="mailto:anujshukla521as@gmail.com"
+                className="font-display text-lg text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors break-all"
               >
-                hello@anuj.design
+                anujshukla521as@gmail.com
               </a>
               <p className="mt-6 text-[10px] font-mono text-[#5A5A5A]">
                 © {new Date().getFullYear()} / Designed in the dark

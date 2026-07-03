@@ -10,12 +10,13 @@ const skillGroups = [
   {
     category: 'Design',
     skills: [
-      'Figma',
-      'Prototyping',
+      'UI Design',
+      'UX Design',
       'Design Systems',
-      'Visual Design',
-      'Interaction',
-      'Motion',
+      'Prototyping',
+      'Wireframing',
+      'Branding & Visual Identity',
+      'Responsive Design',
     ],
   },
   {
@@ -24,25 +25,40 @@ const skillGroups = [
       'User Research',
       'Usability Testing',
       'A/B Testing',
-      'Data Analysis',
+      'Design Thinking',
+      'Microsoft Clarity',
       'JTBD',
-      'Facilitation',
     ],
   },
   {
     category: 'AI & Tech',
     skills: [
-      'Prompt Engineering',
       'AI Product Design',
+      'Skills for AI-Agents',
+      'Agentic AI',
+      'AI Workflow Automation',
       'Conversational UI',
-      'Generative Tools',
-      'Python basics',
+      'Prompt Engineering',
       'HTML / CSS',
+      'Web3 / Crypto',
+      'Developer Tools',
     ],
   },
   {
     category: 'Tools',
-    skills: ['Framer', 'Principle', 'Notion', 'Linear', 'Miro', 'Arc'],
+    skills: [
+      'Figma',
+      'FigJam',
+      'Adobe Creative Suite',
+      'Blender',
+      'Spline',
+      'Notion',
+      'ClickUp',
+      'VS Code',
+      'Cursor',
+      'Github',
+      'Gitlab',
+    ],
   },
 ]
 
@@ -92,7 +108,7 @@ export function Skills() {
     >
       <div className="max-w-6xl mx-auto">
         <SectionHeading
-          index="04"
+          index="06"
           label="Capabilities"
           title="Craft on one hand. Fluency on the other."
           description="I speak both languages — the designer's and the engineer's — and use that overlap to ship faster with fewer surprises."

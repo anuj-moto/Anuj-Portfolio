@@ -15,8 +15,8 @@ export function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
 
-  const line1 = ['Designing', 'products']
-  const line2 = ['powered', 'by', 'intent.']
+  const line1 = ['Design', 'systems']
+  const line2 = ['for', 'AI-first', 'products.']
 
   useGSAP(
     () => {
@@ -122,8 +122,9 @@ export function Hero() {
             ref={subtitleRef}
             className="text-base md:text-lg text-[#8A8A8A] max-w-xl leading-relaxed"
           >
-            I'm Anuj — a product designer shaping interfaces for AI-first tools,
-            with a focus on clarity, pace, and trust.
+            I'm Anuj — a Product Designer with 4+ years building scalable
+            design systems and AI-first interfaces. I ship work that lifts
+            conversion, retention, and engagement for the teams I join.
           </p>
 
           <div ref={ctaRef} className="flex gap-4 flex-wrap">
@@ -143,16 +144,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-6 left-6 z-[3] hidden md:flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#5A5A5A]"
-      >
-        <span className="h-1.5 w-1.5 rounded-full bg-[#5A5A5A]" />
-        <span>Click anywhere — reposition system</span>
-      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}

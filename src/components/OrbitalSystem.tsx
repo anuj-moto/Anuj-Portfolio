@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const STAR_RADIUS = 5
-const CENTER_LERP = 0.06
 const TRAIL_LENGTH = 60
 const TARGET_FPS = 30
 const FRAME_MS = 1000 / TARGET_FPS
@@ -89,9 +88,7 @@ export function OrbitalSystem() {
     let raf = 0
     const isMobile = window.matchMedia('(max-width: 768px)').matches
     const SCALE = isMobile ? 0.55 : 1
-    const TILT_RANGE = 36
-    const center = { x: 0, y: 0, tx: 0, ty: 0 }
-    const baseCenter = { x: 0, y: 0 }
+    const center = { x: 0, y: 0 }
     const bodies: Body[] = BODIES.map((b) => ({
       ...b,
       a: b.a * SCALE,
@@ -111,14 +108,8 @@ export function OrbitalSystem() {
       canvas.width = Math.floor(width * dpr)
       canvas.height = Math.floor(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      if (center.x === 0 && center.y === 0) {
-        center.x = isMobile ? width * 0.5 : width * 0.62
-        center.y = isMobile ? height * 0.22 : height * 0.55
-        center.tx = center.x
-        center.ty = center.y
-      }
-      baseCenter.x = isMobile ? width * 0.5 : center.tx
-      baseCenter.y = isMobile ? height * 0.22 : center.ty
+      center.x = isMobile ? width * 0.5 : width * 0.62
+      center.y = isMobile ? height * 0.22 : height * 0.55
     }
 
     const orbitPos = (b: Body, time: number) => {
@@ -147,9 +138,6 @@ export function OrbitalSystem() {
       lastDraw = now
 
       ctx.clearRect(0, 0, width, height)
-
-      center.x += (center.tx - center.x) * CENTER_LERP
-      center.y += (center.ty - center.y) * CENTER_LERP
 
       if (!reduced && now - lastYearEmit > 80) {
         lastYearEmit = now
@@ -237,60 +225,6 @@ export function OrbitalSystem() {
       ctx.fill()
     }
 
-    const onClick = (e: MouseEvent) => {
-      if (isMobile) return
-      const rect = canvas.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      if (x < 0 || x > rect.width || y < 0 || y > rect.height) return
-      center.tx = x
-      center.ty = y
-      for (const b of bodies) b.trail.length = 0
-    }
-
-    const onOrient = (e: DeviceOrientationEvent) => {
-      if (!isMobile || reduced) return
-      const gamma = Math.max(-30, Math.min(30, e.gamma ?? 0))
-      const beta = Math.max(-30, Math.min(30, (e.beta ?? 0) - 30))
-      const ox = (gamma / 30) * TILT_RANGE
-      const oy = (beta / 30) * TILT_RANGE
-      center.tx = baseCenter.x + ox
-      center.ty = baseCenter.y + oy
-    }
-
-    let orientAttached = false
-    const attachOrient = () => {
-      if (orientAttached) return
-      orientAttached = true
-      window.addEventListener('deviceorientation', onOrient, { passive: true })
-    }
-    const requestOrient = async () => {
-      const Anyclass = (
-        window as unknown as {
-          DeviceOrientationEvent?: {
-            requestPermission?: () => Promise<'granted' | 'denied'>
-          }
-        }
-      ).DeviceOrientationEvent
-      if (Anyclass?.requestPermission) {
-        try {
-          const res = await Anyclass.requestPermission()
-          if (res === 'granted') attachOrient()
-        } catch {
-          /* ignore */
-        }
-      } else {
-        attachOrient()
-      }
-    }
-    const onFirstTouch = () => {
-      window.removeEventListener('touchstart', onFirstTouch)
-      requestOrient()
-    }
-    if (isMobile) {
-      window.addEventListener('touchstart', onFirstTouch, { passive: true })
-    }
-
     let visible = true
     const onVisibility = () => {
       if (!document.hidden && visible) {
@@ -317,17 +251,13 @@ export function OrbitalSystem() {
     resize()
     raf = requestAnimationFrame(step)
     window.addEventListener('resize', resize)
-    window.addEventListener('click', onClick)
     document.addEventListener('visibilitychange', onVisibility)
 
     return () => {
       cancelAnimationFrame(raf)
       io.disconnect()
       window.removeEventListener('resize', resize)
-      window.removeEventListener('click', onClick)
       document.removeEventListener('visibilitychange', onVisibility)
-      window.removeEventListener('touchstart', onFirstTouch)
-      window.removeEventListener('deviceorientation', onOrient)
     }
   }, [reduced])
 

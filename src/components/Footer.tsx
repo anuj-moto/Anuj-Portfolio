@@ -13,20 +13,31 @@ export function Footer() {
 
         <div className="flex flex-col items-start md:items-end gap-4">
           <div className="flex gap-6">
-            {(['Dribbble', 'LinkedIn', 'Twitter', 'GitHub'] as const).map((p) => (
-              <a
-                key={p}
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="animated-underline text-xs uppercase tracking-[0.18em] text-[#8A8A8A] hover:text-[#F5F5F5] transition-colors"
-              >
-                {p}
-              </a>
-            ))}
+            <a
+              href="https://www.linkedin.com/in/anuj-shukla-aba470196/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animated-underline text-xs uppercase tracking-[0.18em] text-[#8A8A8A] hover:text-[#F5F5F5] transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1gerUpX21IzRlN5F18LThwrSOnyEElQ91/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animated-underline text-xs uppercase tracking-[0.18em] text-[#8A8A8A] hover:text-[#F5F5F5] transition-colors"
+            >
+              Resume
+            </a>
+            <a
+              href="mailto:anujshukla521as@gmail.com"
+              className="animated-underline text-xs uppercase tracking-[0.18em] text-[#8A8A8A] hover:text-[#F5F5F5] transition-colors"
+            >
+              Email
+            </a>
           </div>
           <p className="text-[#5A5A5A] text-xs">
-            &copy; {new Date().getFullYear()} Anuj. Designed in the dark.
+            &copy; {new Date().getFullYear()} Anuj Shukla. Designed in the dark.
           </p>
         </div>
       </div>
